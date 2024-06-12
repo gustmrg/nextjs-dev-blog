@@ -1,42 +1,11 @@
+import { Post } from "@/interfaces/post";
 import { PostCard } from "./post-card"
 
-
-interface Post {
-    title: string
-    description: string
-    slug: string
-    isPublished: boolean
-    content?: string | null
+type PostsGridProps = {
+    posts: Post[];
 }
 
-export function PostsGrid() {
-    const posts: Post[] = [
-        {
-            title: 'This is a title',
-            description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, temporibus culpa beatae, architecto perspiciatis labore consequuntur magnam et ipsum quos repellendus animi delectus ipsa provident dignissimos quibusdam quia. Dignissimos, earum!',
-            slug: 'this-is-a-title',
-            isPublished: true            
-        },
-        {
-            title: 'This is a title',
-            description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, temporibus culpa beatae, architecto perspiciatis labore consequuntur magnam et ipsum quos repellendus animi delectus ipsa provident dignissimos quibusdam quia. Dignissimos, earum!',
-            slug: 'this-is-a-title',
-            isPublished: true            
-        },
-        {
-            title: 'This is a title',
-            description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, temporibus culpa beatae, architecto perspiciatis labore consequuntur magnam et ipsum quos repellendus animi delectus ipsa provident dignissimos quibusdam quia. Dignissimos, earum!',
-            slug: 'this-is-a-title',
-            isPublished: true            
-        },
-        {
-            title: 'This is a title',
-            description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, temporibus culpa beatae, architecto perspiciatis labore consequuntur magnam et ipsum quos repellendus animi delectus ipsa provident dignissimos quibusdam quia. Dignissimos, earum!',
-            slug: 'this-is-a-title',
-            isPublished: true            
-        }
-    ]
-
+export function PostsGrid({ posts }: PostsGridProps ) {
     return (
         <div className="mx-60 my-10 space-y-10">
             <div className="space-y-4">
@@ -53,8 +22,13 @@ export function PostsGrid() {
                 </div>
             </div>
             <div className="grid grid-cols-2 gap-8">
-                {posts.map((post) => {
-                    return <PostCard title={post.title} description={post.description} />
+                {posts.length > 0 && posts.map((post) => {
+                    return <PostCard 
+                                key={post.slug} 
+                                title={post.title}
+                                excerpt={post.excerpt}
+                                date={post.date}
+                            />
                 })}
             </div>
         </div>
